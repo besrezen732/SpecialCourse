@@ -7,7 +7,7 @@ namespace SpecialCourse
 {
     public class Helper
     {
-        public string[] OpenFile(string filePath, out string fileString, ref Button Generate )
+        public string[] OpenFile(string filePath, out string fileString, ref Button Generate)
         {
             fileString = String.Empty;
             string[] baseTextMassive = File.ReadAllLines(filePath);
@@ -21,19 +21,14 @@ namespace SpecialCourse
 
         public String Generator(String[] textMassive)
         {
-            int check = 0;//чек элементов
-            int window = 1;//первоначальный размер окна
+            int check = 0; //чек элементов
+            int window = 1; //первоначальный размер окна
             int i = 1; //окно движется с первого элемента
-            string errorLine = string.Empty;//строка элементов с повторением
-            string result = string.Empty;// результирующее окно
-
             string errorMessage = string.Empty;
 
-
-            for (; window <= textMassive.Length - window; window++)
+            if (window <= textMassive.Length - window && i <= textMassive.Length - window)
             {
-
-                for (; i < textMassive.Length - window; i++) 
+                while (i < textMassive.Length - window)
                 {
                     string[] stringLineMassive = new string[window];
                     for (int j = 0; j < window; j++)
@@ -45,25 +40,22 @@ namespace SpecialCourse
                         }
                         check++;
                     }
-                    if (check != window) continue;
-
-                    window++;
-                    int numDuplicate = i;
-                    check = 0;
-                    i = 0;
-
-                    errorLine = String.Join(",", stringLineMassive
-                        .Select(s => s.ToString())
-                        .ToArray());
-                    errorMessage += "Последовательность: " + errorLine + "повторяется с " + numDuplicate + " строки \r\n";
+                    if (check == window)
+                    {
+                        window++;
+                        int numDuplicate = i; // номер дублирующего элемента
+                        var errorLine = String.Join(",", stringLineMassive
+                            .Select(s => s.ToString())
+                            .ToArray()); //строка элементов с повторением
+                        errorMessage += "Последовательность: " + errorLine + " повторяется с " + numDuplicate +
+                                        " строки \r\n";
+                        check = 0;
+                        i = 0;
+                    }
+                    else i++;
                 }
-                string[] resultWindowMassive = new string[window];
-                Array.Copy(textMassive, i, resultWindowMassive, 0, window);
-                result = String.Join(",", resultWindowMassive
-                    .Select(s => s.ToString())
-                    .ToArray());
             }
-            return (errorMessage + "Конечный размер окна " + window + " Окно " + result ).ToString();
+            return errorMessage + "Конечный размер окна " + window;
         }
     }
 }
