@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SpecialCourse
@@ -14,14 +6,15 @@ namespace SpecialCourse
     public partial class BaseForm : Form
     {
         String[] baseText;
-        string fileName = String.Empty;
-        string fileString = String.Empty;
-        Helper Help = new Helper();
+        string _fileName = String.Empty;
+        string _fileString = String.Empty;
+        readonly Helper _help = new Helper();
 
 
         public BaseForm()
         {
             InitializeComponent();
+            Generate.Enabled = false;
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,10 +28,10 @@ namespace SpecialCourse
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     rtbBaseFile.Clear();
-                    fileName = dialog.FileName;
-                    baseText = Help.OpenFile(fileName, out fileString);
-                    fileWayText.Text = fileName;
-                    rtbBaseFile.Text = fileString;
+                    _fileName = dialog.FileName;
+                    baseText = _help.OpenFile(_fileName, out _fileString, ref Generate);
+                    fileWayText.Text = _fileName;
+                    rtbBaseFile.Text = _fileString;
                 }
             }
             catch (Exception ex)
@@ -52,9 +45,9 @@ namespace SpecialCourse
             try
             {
                 rtbBaseFile.Clear();
-                fileName = fileWayText.Text;
-                baseText = Help.OpenFile(fileName, out fileString);
-                rtbBaseFile.Text = fileString;
+                _fileName = fileWayText.Text;
+                baseText = _help.OpenFile(_fileName, out _fileString, ref Generate);
+                rtbBaseFile.Text = _fileString;
             }
             catch (Exception ex)
             {
@@ -64,7 +57,7 @@ namespace SpecialCourse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = Help.Generator(baseText);
+            richTextBox1.Text = _help.Generator(baseText);
         }
     }
 }
