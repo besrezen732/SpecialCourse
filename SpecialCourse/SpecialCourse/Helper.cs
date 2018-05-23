@@ -50,7 +50,7 @@ namespace SpecialCourse
                         errorMessage += "Последовательность: " + errorLine + " повторяется с " + numDuplicate +
                                         " строки \r\n";
                         check = 0;
-                        i = 0;
+                        i = 1;
                     }
                     else i++;
                 }

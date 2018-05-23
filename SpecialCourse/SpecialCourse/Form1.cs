@@ -59,5 +59,15 @@ namespace SpecialCourse
         {
             richTextBox1.Text = _help.Generator(baseText);
         }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Данная программа ревализована в целях спецкурса и не несет в себе практического смысла");
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           Application.Exit();
+        }
     }
 }
