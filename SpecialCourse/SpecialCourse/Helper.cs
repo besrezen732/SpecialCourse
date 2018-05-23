@@ -7,7 +7,7 @@ namespace SpecialCourse
 {
     public class Helper
     {
-        public string[] OpenFile(string filePath, out string fileString, ref Button Generate)
+        public string[] OpenFile(string filePath, out string fileString)
         {
             fileString = String.Empty;
             string[] baseTextMassive = File.ReadAllLines(filePath);
@@ -15,9 +15,10 @@ namespace SpecialCourse
             {
                 fileString += st + "\r\n";
             }
-            Generate.Enabled = true;
             return baseTextMassive;
         }
+
+
 
         public String Generator(String[] textMassive)
         {

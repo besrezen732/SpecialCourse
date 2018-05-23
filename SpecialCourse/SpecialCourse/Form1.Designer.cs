@@ -44,8 +44,11 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.сохранитьРезультатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.answerTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.needQuantizationСheckBox = new System.Windows.Forms.CheckBox();
+            this.levelNumberTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -76,7 +79,7 @@
             // открытьToolStripMenuItem
             // 
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(142, 26);
+            this.открытьToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.открытьToolStripMenuItem.Text = "Открыть";
             this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
@@ -150,8 +153,11 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.levelNumberTextBox);
+            this.groupBox2.Controls.Add(this.needQuantizationСheckBox);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.answerTextBox);
             this.groupBox2.Controls.Add(this.Generate);
             this.groupBox2.Controls.Add(this.richTextBox1);
             this.groupBox2.Location = new System.Drawing.Point(536, 31);
@@ -163,9 +169,9 @@
             // Generate
             // 
             this.Generate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Generate.Location = new System.Drawing.Point(471, 27);
+            this.Generate.Location = new System.Drawing.Point(443, 32);
             this.Generate.Name = "Generate";
-            this.Generate.Size = new System.Drawing.Size(117, 27);
+            this.Generate.Size = new System.Drawing.Size(145, 53);
             this.Generate.TabIndex = 7;
             this.Generate.Text = "Построить";
             this.Generate.UseVisualStyleBackColor = true;
@@ -176,9 +182,9 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(14, 76);
+            this.richTextBox1.Location = new System.Drawing.Point(36, 99);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(574, 471);
+            this.richTextBox1.Size = new System.Drawing.Size(574, 397);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -195,21 +201,50 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
-            // textBox1
+            // answerTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(206, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(134, 22);
-            this.textBox1.TabIndex = 7;
+            this.answerTextBox.Location = new System.Drawing.Point(219, 510);
+            this.answerTextBox.Name = "answerTextBox";
+            this.answerTextBox.Size = new System.Drawing.Size(134, 22);
+            this.answerTextBox.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 32);
+            this.label2.Location = new System.Drawing.Point(33, 510);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 17);
             this.label2.TabIndex = 8;
             this.label2.Text = "Конечный размер окна(n)";
+            // 
+            // needQuantizationСheckBox
+            // 
+            this.needQuantizationСheckBox.AutoSize = true;
+            this.needQuantizationСheckBox.Location = new System.Drawing.Point(36, 36);
+            this.needQuantizationСheckBox.Name = "needQuantizationСheckBox";
+            this.needQuantizationСheckBox.Size = new System.Drawing.Size(214, 21);
+            this.needQuantizationСheckBox.TabIndex = 9;
+            this.needQuantizationСheckBox.Text = "Включить переквантование";
+            this.needQuantizationСheckBox.UseVisualStyleBackColor = true;
+            this.needQuantizationСheckBox.CheckedChanged += new System.EventHandler(this.needQuantizationСheckBox_CheckedChanged);
+            // 
+            // levelNumberTextBox
+            // 
+            this.levelNumberTextBox.Enabled = false;
+            this.levelNumberTextBox.Location = new System.Drawing.Point(262, 65);
+            this.levelNumberTextBox.Name = "levelNumberTextBox";
+            this.levelNumberTextBox.Size = new System.Drawing.Size(124, 22);
+            this.levelNumberTextBox.TabIndex = 10;
+            this.levelNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.levelNumberTextBox_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(183, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Уровень переквантования";
             // 
             // BaseForm
             // 
@@ -250,7 +285,10 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьРезультатToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox answerTextBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox levelNumberTextBox;
+        private System.Windows.Forms.CheckBox needQuantizationСheckBox;
     }
 }
 

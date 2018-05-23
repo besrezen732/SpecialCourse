@@ -15,6 +15,8 @@ namespace SpecialCourse
         {
             InitializeComponent();
             Generate.Enabled = false;
+            needQuantizationСheckBox.Enabled = false;
+            richTextBox1.Enabled = false;
         }
 
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -29,7 +31,12 @@ namespace SpecialCourse
                 {
                     rtbBaseFile.Clear();
                     _fileName = dialog.FileName;
-                    baseText = _help.OpenFile(_fileName, out _fileString, ref Generate);
+                    baseText = _help.OpenFile(_fileName, out _fileString);
+                    if (baseText != null)
+                    {
+                        Generate.Enabled = true;
+                        needQuantizationСheckBox.Enabled = true;
+                    }
                     fileWayText.Text = _fileName;
                     rtbBaseFile.Text = _fileString;
                 }
@@ -46,7 +53,12 @@ namespace SpecialCourse
             {
                 rtbBaseFile.Clear();
                 _fileName = fileWayText.Text;
-                baseText = _help.OpenFile(_fileName, out _fileString, ref Generate);
+                baseText = _help.OpenFile(_fileName, out _fileString);
+                if (baseText != null)
+                {
+                    Generate.Enabled = true;
+                    needQuantizationСheckBox.Enabled = true;
+                }
                 rtbBaseFile.Text = _fileString;
             }
             catch (Exception ex)
@@ -57,7 +69,14 @@ namespace SpecialCourse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = _help.Generator(baseText);
+            if (needQuantizationСheckBox.Checked)
+            {
+                if (Convert.ToInt32(levelNumberTextBox.Text) >= 10)
+                    MessageBox.Show("Число уровней квантования не должно превышать 10");
+            }
+            else
+                richTextBox1.Text = _help.Generator(baseText);
+
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,6 +87,27 @@ namespace SpecialCourse
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
            Application.Exit();
+        }
+
+        private void needQuantizationСheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+           
+                levelNumberTextBox.Enabled = needQuantizationСheckBox.Checked;
+           
+        }
+
+        private void levelNumberTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+
+            if ((!Char.IsDigit(number)))
+            {
+                e.Handled = true;
+            }
+            if ((e.KeyChar == (char)Keys.Back) || e.KeyChar == (char)Keys.Delete)
+            {
+                e.Handled = false;
+            }
         }
     }
 }
