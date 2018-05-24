@@ -8,6 +8,8 @@ namespace SpecialCourse
         String[] baseText;
         string _fileName = String.Empty;
         string _fileString = String.Empty;
+
+        private int level = 0;
         readonly Helper _help = new Helper();
 
 
@@ -71,11 +73,15 @@ namespace SpecialCourse
         {
             if (needQuantizationСheckBox.Checked)
             {
-                if (Convert.ToInt32(levelNumberTextBox.Text) >= 10)
+                level = Convert.ToInt32(levelNumberTextBox.Text);
+                if (level > 10)
                     MessageBox.Show("Число уровней квантования не должно превышать 10");
+                else
+                    richTextBox1.Text = _help.Generator(baseText, ref answerTextBox, level,
+                        needQuantizationСheckBox.Checked);
             }
             else
-                richTextBox1.Text = _help.Generator(baseText);
+                richTextBox1.Text = _help.Generator(baseText, ref answerTextBox);
 
         }
 
@@ -91,9 +97,7 @@ namespace SpecialCourse
 
         private void needQuantizationСheckBox_CheckedChanged(object sender, EventArgs e)
         {
-           
                 levelNumberTextBox.Enabled = needQuantizationСheckBox.Checked;
-           
         }
 
         private void levelNumberTextBox_KeyPress(object sender, KeyPressEventArgs e)

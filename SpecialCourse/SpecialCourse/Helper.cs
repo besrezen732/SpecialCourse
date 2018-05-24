@@ -18,15 +18,42 @@ namespace SpecialCourse
             return baseTextMassive;
         }
 
-
-
-        public String Generator(String[] textMassive)
+        public String Generator(String[] textMassive,ref TextBox resultTb, int level = 0, bool needQuantizationСheckBox = false)
         {
+
+
             int check = 0; //чек элементов
             int window = 1; //первоначальный размер окна
             int i = 1; //окно движется с первого элемента
             string errorMessage = string.Empty;
+            double[] qMassive = new double[textMassive.Length];
+            double[] levelMassive = new double[level];
 
+
+
+
+            #region //Переквантовка
+
+            if (needQuantizationСheckBox)
+            {
+                for (int j = 0; j < qMassive.Length; j++)
+                {
+                    string convertString = textMassive[j].Replace(".", ",");
+                    qMassive[j] = double.Parse(convertString);
+
+                }
+                var levelStep = (qMassive.Max() - qMassive.Min()) / level;
+
+                for (int j = 0; j < level; j++)
+                {
+                    levelMassive[j] = qMassive.Min() + (levelStep * j);
+                }
+            }
+
+
+            #endregion
+
+            #region // цикл
             if (window <= textMassive.Length - window && i <= textMassive.Length - window)
             {
                 while (i < textMassive.Length - window)
@@ -56,6 +83,8 @@ namespace SpecialCourse
                     else i++;
                 }
             }
+            #endregion
+            resultTb.Text = window.ToString();
             return errorMessage + "Конечный размер окна " + window;
         }
     }
