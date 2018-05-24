@@ -90,6 +90,7 @@
             this.сохранитьРезультатToolStripMenuItem.Name = "сохранитьРезультатToolStripMenuItem";
             this.сохранитьРезультатToolStripMenuItem.Size = new System.Drawing.Size(229, 26);
             this.сохранитьРезультатToolStripMenuItem.Text = "Сохранить результат";
+            this.сохранитьРезультатToolStripMenuItem.Click += new System.EventHandler(this.сохранитьРезультатToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
@@ -249,7 +250,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(574, 370);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // label4
             // 

@@ -118,11 +118,22 @@ namespace SpecialCourse
             }
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+       
+
+        private void сохранитьРезультатToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
+                SaveFileDialog save = new SaveFileDialog();
+                save.Title = ("Сохранить как...");
+                save.Filter = "Text Document (*.txt) | *.txt| All Files (*.*)|*.*";
+                save.OverwritePrompt = true;
+                if (save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    richTextBox1.SaveFile(save.FileName, RichTextBoxStreamType.PlainText);
+                    this.Text = save.FileName;
+                }
+         
 
         }
-
-       
     }
 }

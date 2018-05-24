@@ -9,6 +9,9 @@ namespace SpecialCourse
 {
     public class Helper
     {
+        public string resultForAnswerString = string.Empty;
+
+
         public string[] OpenFile(string filePath,ref RichTextBox rtbBaseFile)
         {
             StringBuilder fileString = new StringBuilder();
@@ -99,8 +102,16 @@ namespace SpecialCourse
                 }
             }
             #endregion
+
             resultTb.Text = window.ToString();
-            return errorMessage + "Конечный размер окна " + window;
+            resultForAnswerString = errorMessage + "Конечный размер окна " + window;
+            return resultForAnswerString;
+        }
+
+        public void SaveFile()
+        {
+            
         }
     }
+    
 }
