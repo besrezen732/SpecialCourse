@@ -42,6 +42,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rtbBaseFile = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.qStepTb = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.levelNumberTextBox = new System.Windows.Forms.TextBox();
             this.needQuantizationСheckBox = new System.Windows.Forms.CheckBox();
@@ -49,8 +51,6 @@
             this.answerTextBox = new System.Windows.Forms.TextBox();
             this.Generate = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.qStepTb = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -184,6 +184,23 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(33, 101);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(152, 17);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Шаг переквантования";
+            // 
+            // qStepTb
+            // 
+            this.qStepTb.Enabled = false;
+            this.qStepTb.Location = new System.Drawing.Point(262, 98);
+            this.qStepTb.Name = "qStepTb";
+            this.qStepTb.Size = new System.Drawing.Size(124, 22);
+            this.qStepTb.TabIndex = 12;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -245,28 +262,13 @@
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.richTextBox1.Location = new System.Drawing.Point(36, 126);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(574, 370);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 101);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 17);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Шаг переквантования";
-            // 
-            // qStepTb
-            // 
-            this.qStepTb.Enabled = false;
-            this.qStepTb.Location = new System.Drawing.Point(262, 98);
-            this.qStepTb.Name = "qStepTb";
-            this.qStepTb.Size = new System.Drawing.Size(124, 22);
-            this.qStepTb.TabIndex = 12;
             // 
             // BaseForm
             // 

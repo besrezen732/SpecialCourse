@@ -18,7 +18,6 @@ namespace SpecialCourse
             InitializeComponent();
             Generate.Enabled = false;
             needQuantizationСheckBox.Enabled = false;
-            richTextBox1.Enabled = false;
             answerTextBox.Enabled = false;
             qStepTb.Enabled = false;
         }
@@ -77,8 +76,8 @@ namespace SpecialCourse
             if (needQuantizationСheckBox.Checked)
             {
                 level = Convert.ToInt32(levelNumberTextBox.Text);
-                if (level > 1000)
-                    MessageBox.Show("Число уровней квантования не должно превышать 1000");
+                if (level > 10000)
+                    MessageBox.Show("Число уровней квантования не должно превышать 10000");
                 else
                     richTextBox1.Text = _help.Generator(baseText, ref answerTextBox, ref rtbBaseFile, ref qStep, level,
                         needQuantizationСheckBox.Checked);
@@ -135,5 +134,7 @@ namespace SpecialCourse
          
 
         }
+
+     
     }
 }

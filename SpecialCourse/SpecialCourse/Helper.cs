@@ -12,7 +12,7 @@ namespace SpecialCourse
         public string resultForAnswerString = string.Empty;
 
 
-        public string[] OpenFile(string filePath,ref RichTextBox rtbBaseFile)
+        public string[] OpenFile(string filePath, ref RichTextBox rtbBaseFile)
         {
             StringBuilder fileString = new StringBuilder();
 
@@ -20,28 +20,28 @@ namespace SpecialCourse
             string[] baseTextMassive = File.ReadAllLines(filePath);
             foreach (string st in baseTextMassive)
             {
-                fileString.AppendLine(numberString+") "+st);
+                fileString.AppendLine(numberString + ") " + st);
                 numberString++;
             }
             rtbBaseFile.Text = fileString.ToString();
             return baseTextMassive;
         }
 
-        public String Generator(String[] textMassive,ref TextBox resultTb, ref RichTextBox rtbBaseFile, ref double qStep, int level = 0, bool needQuantizationСheckBox = false)
+        public String Generator(String[] textMassive, ref TextBox resultTb, ref RichTextBox rtbBaseFile,
+            ref double qStep, int level = 0, bool needQuantizationСheckBox = false)
         {
 
-
             int check = 0; //чек элементов
-            int window = 1; //первоначальный размер окна
+            
             int i = 1; //окно движется с первого элемента
             string errorMessage = string.Empty;
             double[] qMassive = new double[textMassive.Length];
-           
 
-
+            String[] qtextMassive = new String[textMassive.Length];
+            String[] source;
 
             #region //Переквантовка
-
+            int window = 1; //первоначальный размер окна
             if (needQuantizationСheckBox)
             {
                 StringBuilder qFileString = new StringBuilder();
@@ -58,29 +58,36 @@ namespace SpecialCourse
                 var levelStep = (max - min) / level;
                 qStep = levelStep;
 
-
-                for (int j = 0; j < qMassive.Length; j++)
+                if (levelStep != 0)
                 {
-                    textMassive[j] = ((int)(Math.Round((qMassive[j]- min) / levelStep))).ToString(CultureInfo.InvariantCulture);
-                    qFileString.AppendLine(j + ") " + qMassive[j] + " --> " + textMassive[j]);
+                    for (int j = 0; j < qMassive.Length; j++)
+                    {
+                        qtextMassive[j] =
+                            ((int) (Math.Round((qMassive[j] - min) / levelStep)))
+                            .ToString(CultureInfo.InvariantCulture);
+                        qFileString.AppendLine(j + ") " + qMassive[j] + " --> " + qtextMassive[j]);
+                    }
+                    rtbBaseFile.Clear();
+                    rtbBaseFile.Text = qFileString.ToString();
                 }
-                rtbBaseFile.Clear();
-                rtbBaseFile.Text = qFileString.ToString();
             }
-
-
+            if (needQuantizationСheckBox)
+                source = qtextMassive;
+            else
+                source = textMassive;
             #endregion
 
             #region // цикл
-            if (window <= textMassive.Length - window && i <= textMassive.Length - window)
+
+            if (window <= source.Length - window && i <= source.Length - window)
             {
-                while (i < textMassive.Length - window)
+                while (i < source.Length - window)
                 {
                     string[] stringLineMassive = new string[window];
                     for (int j = 0; j < window; j++)
                     {
-                        Array.Copy(textMassive, i, stringLineMassive, 0, window);
-                        if (textMassive[j] != textMassive[j + i])
+                        Array.Copy(source, i, stringLineMassive, 0, window);
+                        if (source[j] != source[j + i])
                         {
                             break;
                         }
@@ -101,17 +108,18 @@ namespace SpecialCourse
                     else i++;
                 }
             }
+
             #endregion
 
             resultTb.Text = window.ToString();
             resultForAnswerString = errorMessage + "Конечный размер окна " + window;
+           
             return resultForAnswerString;
         }
 
         public void SaveFile()
         {
-            
+
         }
     }
-    
 }
